@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="mainDiv">
+       <div class="centerDiv">
+        <h1> Welcome To Typing Master</h1> <br>
+        <h2 id="msg"> </h2><br/>
+        <textarea id="mywords" cols="100" rows="10" placeholder="rembere my words"></textarea><br>
+        <button id="btn">start</button>
+        </div>
+    </div>
+    ><script>
+        const setOfWords =[
+        'Your time is limited', 
+        'so don’t waste it living someone  life', 
+        'Don’t be trapped by dogma ',
+       ' which is living with the results of other people’s thinking'
+        ]
+        const Msg = document.getElementById('msg');
+        const typeWords = document.getElementById('mywords')
+        const btn= document.getElementById('btn')
+        let startTime, endTime;
+
+const playGame=()=>{
+    console.log("click me")
+ let randomNum = Math.floor(Math.random()*setOfWords.length);
+ Msg.innerText=setOfWords[randomNum]
+ console.log( Msg.innerText)
+ let date = new Date();
+ startTime= date.getTime();
+ console.log("start time", startTime)
+ btn.innerText='Done'
+}
+
+const endGame=()=>{
+    let date = new Date();
+    endTime= date.getTime();  
+    console.log('endTime', endTime)
+    let totalTime = ((endTime-startTime)/1000)
+    console.log(totalTime)
+
+    let totalStr = typeWords.value ;
+    console.log("totalStr", totalStr)
+
+    let wordCount = wordCounter(totalStr);
+    console.log("wordCount", wordCount)
+    let speed =Math.round((wordCount/totalTime)*60);
+     let finalmsg = " you Typed total at "+ speed +"word per miniute"
+     Msg.innerText= finalmsg;
+
+     
+}
+   const  wordCounter =(str)=>{
+        console.log("str",str)
+       let response = str.split(" ").length ;
+       return response;
+}
+
+btn.addEventListener('click', function(){
+    if(this.innerText =='start'){
+        console.log("if cond.")
+        typeWords.disabled = false;
+        playGame();
+    }else if(this.innerText =='Done'){
+          typeWords.disabled = true
+          btn.innerText='start'
+          endGame();
+    }
+})
+    </script>
+</body>
+</html>
